@@ -3,6 +3,7 @@ class Direction(object):
    	west = 2
    	east= 3
    	south = 4
+ 
 
 def main():
     currentPos = (0,0)
@@ -11,6 +12,7 @@ def main():
     inputdata = inputfile.read()
     inputfile.close()
     instructions = []
+    visited = dict()
     
     splitdata = inputdata.split(", ")
 
@@ -26,11 +28,8 @@ def main():
     #List of instructions now exist
     for step in instructions:
         turnDir = step[0]
-        print currentDir
         if turnDir == "L":
-            print "LEEFt"
             if currentDir == Direction.north:
-                print "we're north yo"
                 currentDir = Direction.west
             elif currentDir == Direction.west:
                 currentDir = Direction.south
@@ -50,19 +49,42 @@ def main():
                 currentDir = Direction.west
 
         #NOW WALK!
+        oldPos = currentPos
         if currentDir == Direction.north:
+            for x in range(0, int(step[1])):
+                if (currentPos[0], currentPos[1]+x) in visited:
+                    print (currentPos[0], currentPos[1]+x)
+                else:
+                    visited[(currentPos[0], currentPos[1]+x)] = True
             currentPos = (currentPos[0], currentPos[1]+int(step[1]))
+
             
         if currentDir == Direction.west:
+            for x in range(0, int(step[1])):
+                if (currentPos[0]-x, currentPos[1]) in visited:
+                    print (currentPos[0]-x, currentPos[1])
+                else:
+                    visited[(currentPos[0]-x, currentPos[1])] = True
             currentPos = (currentPos[0]-int(step[1]), currentPos[1])
 
         if currentDir == Direction.east:
+            for x in range(0, int(step[1])):
+                if (currentPos[0]+x, currentPos[1]) in visited:
+                    print (currentPos[0]+x, currentPos[1])
+                else:
+                    visited[(currentPos[0]+x, currentPos[1])] = True
             currentPos = (currentPos[0]+int(step[1]), currentPos[1])
 
         if currentDir == Direction.south:
+            for x in range(0, int(step[1])):
+                if (currentPos[0], currentPos[1]-x) in visited:
+                    print (currentPos[0], currentPos[1]-x)
+                else:
+                    visited[(currentPos[0], currentPos[1]-x)] = True
             currentPos = (currentPos[0], currentPos[1]-int(step[1]))
 
-        print currentPos
+        #print visited
+
 
     print abs(currentPos[0]) + abs(currentPos[1])
 
