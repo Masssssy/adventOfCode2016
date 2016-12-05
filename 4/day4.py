@@ -43,9 +43,5 @@ def main():
 	    if valid == True:
 	    	sectorSum += int(todo[1]) 	
     print sectorSum
-
-
-
-
 if __name__ == "__main__":
     main()
