@@ -16,8 +16,14 @@ def main():
             column2 = ''.join(column)
         columns.append(column2)
 
+    print "Most common"
     for b in range (0,8):
         print(collections.Counter(columns[b]).most_common(1)[0])
+
+    print "Least common"
+    for b in range (0,8):
+        a = collections.Counter(columns[b]).most_common()[-1]
+        print a
 
 if __name__ == "__main__":
     main()
