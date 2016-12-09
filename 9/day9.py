@@ -5,7 +5,6 @@ def main():
     inputdata = inputfile.read()
     inputfile.close()
 
-
     regex = re.compile("(\d+x\d+)", re.UNICODE)
     data = regex.findall(inputdata)
 
@@ -32,7 +31,6 @@ def main():
             #repeat string
             decryptString += repData
 
-
 	    #get no of data points in string
 	    #print regex.findall(repData)
         noPoints = len(regex.findall(repData)) + 1
@@ -41,7 +39,6 @@ def main():
         print goodData
 
     print len(decryptString)
-
 
 if __name__ == "__main__":
     main()
