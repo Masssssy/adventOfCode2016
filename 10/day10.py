@@ -10,6 +10,8 @@ def main():
     bots = dict() #key=botId, list 1 = current chips, tuple = (lowlocation, high location)
     outputs = dict()
 
+    importantOutputs = [[],[],[]]
+
     startBotId = None
     initial = [x for x in splitData if x.startswith('value')]
     for instr in initial: 
@@ -62,6 +64,7 @@ def main():
     #Bots are created, start dealing chips
     hasTwo = []
     currentBotId = startBotId
+    theBot = None
     found = False
     while found == False:
     	currentBot = bots.get(currentBotId)
@@ -76,8 +79,7 @@ def main():
 
     	if chip1 == 17 and chip2 == 61 or chip1 == 61 and chip2 == 17:
     		print "FOOOUND!!!"
-    		found = True
-    		print currentBotId
+    		theBot = currentBotId
 
     	if chip1 > chip2:
     		low = chip2
@@ -99,6 +101,10 @@ def main():
     		#give to output
     		#giveLowBot = output.get(giveLowTo[1])
     		giveLowBot = None
+    		if giveLowTo[1] == 0 or giveLowTo[1] == 1 or giveLowTo[1] == 2:
+    			importantOutputs[giveLowTo[1]].append(low)
+
+
 
     	#give high
     	if giveHighTo[0] == "bot":
@@ -109,6 +115,8 @@ def main():
     		#give to output
     		#giveHighBot = output.get(giveHighTo[1])
     		giveHighBot = None
+    		if giveHighTo[1] == 0 or giveHighTo[1] == 1 or giveHighTo[1] == 2:
+    			importantOutputs[giveHighTo[1]].append(high)
 
     	#print giveLowBot
     	#print giveHighBot
@@ -134,7 +142,13 @@ def main():
     			hasTwo.append(giveHighTo[1])
 
     	#print hasTwo
-    	currentBotId=hasTwo.pop(0) 
+    	if len(hasTwo) > 0:
+    		currentBotId=hasTwo.pop(0)
+    	else:
+    		#done
+    		found = True
+    		print theBot
+    		print importantOutputs[0][0] * importantOutputs[1][0] * importantOutputs[2][0]
 
 if __name__ == "__main__":
     main()
