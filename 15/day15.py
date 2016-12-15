@@ -10,6 +10,7 @@ def main():
     for disc in splitData:
     	digits = [int(s) for s in re.findall(r'\b\d+\b', disc)]
     	discs.append([digits[0], digits[1], digits[3]])
+    disclen = len(discs) #Just add disk 7 in input file
 
     startTime = 0 
     found = False
@@ -19,7 +20,7 @@ def main():
     		discPos = getDiscPosition(disc, startTime)
     		if discPos == 0:
     			openlist.append(discPos)
-    			if len(openlist) == 6:
+    			if len(openlist) == disclen:
     				print startTime
     				found = True
     		else:
