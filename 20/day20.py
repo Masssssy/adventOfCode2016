@@ -24,14 +24,11 @@ def main():
     	for item in sortedList:
     		if int(item[1]) < int(blockedUntil):
     			sortedList.remove(item)
-    			print "remove"
 
     	test = int(sortedList[0][0]) - int(blockedUntil)
     	if(test > 1):
-    		print "found"
     		found = True
-    		print blockedUntil
-    		print sortedList[0][0]
+    		print blockedUntil +1
 
 if __name__ == "__main__":
     main()
