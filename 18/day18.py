@@ -11,7 +11,7 @@ def main():
     tiles = splitData[0].count('.')
     row = splitData[0]
     print row
-    for x in range(0,39):
+    for x in range(0,399999):
     	row = generateRow(row)
     	print row
     	tiles += row.count('.')
